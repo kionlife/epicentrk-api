@@ -21,8 +21,8 @@ class Main {
 
     public function getNewOrders()
     {
-        $api = new Methods;
-        $filter['statusCode'][] = 'canceled';
+        $api = new Methods();
+        $filter['statusCode'][] = 'new';
         $orders = $api->getOrders($filter);
 
         return $orders;
@@ -30,6 +30,5 @@ class Main {
 
 }
 
-$index = new main();
-
+$index = new Main();
 var_dump($index->getNewOrders());

@@ -6,10 +6,13 @@
             "email": "roman.kudin@yahoo.com"
         }
     ],
-    "require": {},
+    "require": {
+        "ext-curl": "*",
+        "ext-json": "*"
+    },
     "autoload": {
         "psr-4": {
-            "Api\\": "/src/Api"
+            "Api\\": "src/Api"
         }
     }
 }
