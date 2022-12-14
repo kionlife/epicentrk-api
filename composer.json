@@ -1,0 +1,20 @@
+{
+    "name": "kionl/epicentrk",
+    "description": "Library for work with API of epicentrk.ua",
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "Kionl\\Epicentrk\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "kionlife",
+            "email": "roman.kudin@yahoo.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "ext-curl": "*"
+    }
+}
