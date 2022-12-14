@@ -1,6 +1,10 @@
 # epicentrk-api
 Library for work with API of epicentrk.ua
 
+For install you can use composer
+
+`composer require kionl/epicentrk`
+
     /**
      * Фільтр замовлень
      * Статус замовлення ключ - ['statusCode'][] =
