@@ -1,12 +1,11 @@
 <?php
 
-namespace Api;
+namespace Api\Client;
 require_once 'Paths.php';
 use Api\Paths as Paths;
 
-class Methods {
+class Client {
 	private $token, $refresh, $credentials;
-    private Paths $paths;
 
     function __construct() {
         session_start();
@@ -27,11 +26,8 @@ class Methods {
         }
 	}
 	
-	public function request($url, $params = array(), $method = 'GET') {
-        $post = [
-            'POST' => 1,
-            'GET'  => 0
-        ];
+	public function get($url, $params = array()) {
+
         if ($params)
             $fields = '?' . http_build_query($params);
         else
@@ -43,7 +39,32 @@ class Methods {
             curl_setopt($curl, CURLOPT_URL, $url . $fields);
             curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($curl,CURLOPT_TIMEOUT, 5);
-            curl_setopt($curl, CURLOPT_POST, $post[$method]);
+            curl_setopt($curl, CURLOPT_POST, 0);
+            curl_setopt($curl, CURLOPT_HTTPHEADER, array('Authorization: Bearer ' . $this->token));
+
+            $response = curl_exec($curl);
+
+            curl_close($curl);
+
+            return json_decode($response);
+        } catch (\Exception $e) {
+            return $e->getMessage();
+        }
+	}
+	public function post($url, $params = array()) {
+
+        if ($params)
+            $fields = '?' . http_build_query($params);
+        else
+            $fields = '';
+
+        try {
+            $curl = curl_init();
+
+            curl_setopt($curl, CURLOPT_URL, $url . $fields);
+            curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($curl,CURLOPT_TIMEOUT, 5);
+            curl_setopt($curl, CURLOPT_POST, 1);
             curl_setopt($curl, CURLOPT_HTTPHEADER, array('Authorization: Bearer ' . $this->token));
 
             $response = curl_exec($curl);
@@ -57,33 +78,12 @@ class Methods {
 	}
 		
 	public function auth() {
-        $response = $this->request($this->paths->login(), $this->credentials, 'POST');
+        $response = $this->post($this->paths->login(), $this->credentials);
 
         $_SESSION['auth'] = $response->token->auth;
         $_SESSION['refresh'] = $response->token->refresh;
 
         return $response;
 	}
-	
-	public function getOrders($filter, $offset = 0, $limit = 50) {
 
-        $params = [
-            'offset' => 0,
-            'limit'  => 50,
-            'filter' => $filter
-        ];
-
-        return $this->request($this->paths->orders(), $params);
-	}
-
-	public function getProducts($filter, $offset = 0, $limit = 50) {
-
-        $params = [
-            'offset' => 0,
-            'limit'  => 50,
-            'filter' => $filter
-        ];
-
-        return $this->request($this->paths->products(), $params);
-	}
 }

@@ -2,9 +2,9 @@
 
 namespace Api;
 
-require_once 'Api.php';
+require_once __DIR__ . '/vendor/autoload.php';
 
-use Api\Methods;
+use Api\Methods\Methods;
 
 class Main {
 
@@ -21,7 +21,7 @@ class Main {
 
     public function getNewOrders()
     {
-        $api = new \Api\Methods;
+        $api = new Methods;
         $filter['statusCode'][] = 'canceled';
         $orders = $api->getOrders($filter);
 

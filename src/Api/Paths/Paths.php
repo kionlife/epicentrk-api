@@ -1,6 +1,6 @@
 <?php
 
-namespace Api;
+namespace Api\Paths;
 
 class Paths
 {

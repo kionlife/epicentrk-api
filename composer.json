@@ -1,0 +1,15 @@
+{
+    "name": "kionl/epicentrk",
+    "authors": [
+        {
+            "name": "kionlife",
+            "email": "roman.kudin@yahoo.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Api\\": "/src/Api"
+        }
+    }
+}
