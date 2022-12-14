@@ -3,6 +3,7 @@
 namespace Api\Client;
 
 use Api\Paths\Paths;
+use Dotenv\Dotenv;
 
 class Client
 {
@@ -15,15 +16,12 @@ class Client
         /**
          *
          */
-        $this->credentials = ['email' => 'sales', 'password' => ''];
+        $config = Dotenv::createImmutable(__DIR__);
+        $config->load();
+        $this->credentials = ['email' => $_ENV['email'], 'password' => $_ENV['password']];
         $this->paths = new Paths();
 
         $this->auth();
-
-    }
-
-    public function test() {
-        echo 'test';
     }
 
     public function auth()

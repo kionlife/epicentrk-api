@@ -22,8 +22,9 @@ class Main {
     public function getNewOrders()
     {
         $api = new Methods();
-        $filter['statusCode'][] = 'new';
+        $filter['statusCode'][] = 'canceled';
         $orders = $api->getOrders($filter);
+
 
         return $orders;
     }
