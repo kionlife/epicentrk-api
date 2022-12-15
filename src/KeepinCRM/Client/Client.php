@@ -1,8 +1,8 @@
 <?php
 
-namespace Api\Client;
+namespace KeepinCrm\Client;
 
-use Api\Paths\Paths;
+use KeepinCrm\Paths\Paths;
 
 class Client
 {
