@@ -16,9 +16,9 @@ class Client
         /**
          *
          */
-        $config = Dotenv::createImmutable(__DIR__);
+        $config = Dotenv::createImmutable(dirname(__DIR__, 3));
         $config->load();
-        $this->credentials = ['email' => $_ENV['email'], 'password' => $_ENV['password']];
+        $this->credentials = ['email' => $_ENV['EMAIL'], 'password' => $_ENV['PASSWORD']];
         $this->paths = new Paths();
 
         $this->auth();
@@ -49,14 +49,14 @@ class Client
         curl_setopt($curl, CURLOPT_POST, 1);
         curl_setopt($curl, CURLOPT_HTTPHEADER, array('Authorization: Bearer ' . $this->token));
         $response = curl_exec($curl);
-        var_dump($response);
+
         curl_close($curl);
         return json_decode($response);
     }
 
 //TODO add check if auth success
 
-    public function get($url, $params = array())
+    public function get($url, $params = array(), $array = false)
     {
 
         if ($params)
@@ -76,7 +76,7 @@ class Client
 
         curl_close($curl);
 
-        return json_decode($response);
+        return json_decode($response, $array);
 
     }
 

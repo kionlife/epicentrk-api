@@ -18,4 +18,9 @@ class Paths
     {
         return 'https://core-api.epicentrm.cloud/v2/pim/products';
     }
+
+    public function np($data): string
+    {
+        return sprintf('https://core-api.epicentrm.cloud/v2/deliveries/nova_poshta/settlements/%s/offices/%s',$data[0], $data[1]);
+    }
 }

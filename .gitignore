@@ -1,4 +1,4 @@
 /vendor/
 /.idea/
 .env
-/src/Api/Client/.env
+/.env

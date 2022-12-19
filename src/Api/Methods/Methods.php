@@ -22,7 +22,7 @@ class Methods {
             'filter' => $filter
         ];
 
-        return $this->client->get($this->paths->orders(), $params);
+        return $this->client->get($this->paths->orders(), $params, true);
 	}
 
 	public function getProducts($filter, $offset = 0, $limit = 50) {
@@ -34,5 +34,10 @@ class Methods {
         ];
 
         return $this->client->get($this->paths->products(), $params);
+	}
+
+	public function getNpData($data) {
+
+        return $this->client->get($this->paths->np($data));
 	}
 }

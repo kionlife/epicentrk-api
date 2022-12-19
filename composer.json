@@ -9,7 +9,8 @@
     "require": {
         "ext-curl": "*",
         "ext-json": "*",
-        "vlucas/phpdotenv": "^5.5"
+        "vlucas/phpdotenv": "^5.5",
+        "thingengineer/mysqli-database-class": "dev-master"
     },
     "autoload": {
         "psr-4": {
