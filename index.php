@@ -61,9 +61,9 @@ class Main {
         return $orders;
     }
 
-    public function getOrderByNumber()
+    public function getOrderByNumber($number)
     {
-        $filter['number'] = $_GET['number'];
+        $filter['number'] = $number;
         $orders = $this->api->getOrders($filter);
 
         return $orders;
@@ -71,7 +71,11 @@ class Main {
 
     public function checkNewOrders() {
         $clientExist = true;
-        $newOrders = $this->getOrderByNumber();
+        if ($_GET['number']) {
+            $newOrders = $this->getOrderByNumber($_GET['number']);
+        } else {
+            $newOrders = $this->getNewOrders();
+        }
 
         if ($newOrders['total'] > 0) {
             $keepinAll = $this->getAllProducts();
@@ -127,9 +131,15 @@ class Main {
         return $response;
     }
 
+    public function receiveWebhook() {
+
+    }
+
 
 
 }
+
+
 
 $index = new Main();
 var_dump($index->checkNewOrders());
