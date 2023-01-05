@@ -25,6 +25,10 @@ class Methods {
         return $this->client->get($this->paths->orders(), $params, true);
 	}
 
+	public function getOrderById($id) {
+        return $this->client->get($this->paths->orderById($id));
+	}
+
 	public function getProducts($filter, $offset = 0, $limit = 50) {
 
         $params = [
@@ -35,6 +39,10 @@ class Methods {
 
         return $this->client->get($this->paths->products(), $params);
 	}
+
+    public function changeOrderStatus($orderId, $status = 'confirmed_by_merchant') {
+        return $this->client->post($this->paths->changeStatus($orderId, $status));
+    }
 
 	public function getNpData($data) {
 

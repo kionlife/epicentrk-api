@@ -131,7 +131,9 @@ class Main {
         return $response;
     }
 
-    public function receiveWebhook() {
+    public function changeStatus($orderId) {
+        $this->api->changeOrderStatus($orderId);
+        $data = $this->api->getOrderById($orderId);
 
     }
 
@@ -142,4 +144,9 @@ class Main {
 
 
 $index = new Main();
-var_dump($index->checkNewOrders());
+
+if ($_GET['method'] == 'changeStatus') {
+    $index->changeStatus($_POST['order_id']);
+} else {
+    var_dump($index->checkNewOrders());
+}
